@@ -1,0 +1,15 @@
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-alias: spring
+    key-store: src/main/resources/saml/keystore.jks
+    key-store-password: secret
+security:
+  saml2:
+    metadata-url: https://dev-9187050.okta.com/app/exk36pxqi0LdgzO1z5d6/sso/saml/metadata
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp

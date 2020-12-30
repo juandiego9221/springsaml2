@@ -36,7 +36,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userSearchFilter("uid={0}")
                 .groupSearchBase("ou=groups")
                 .groupSearchFilter("uniqueMember={0}")
-//                .contextSource(contextSource())
+                .contextSource(contextSource())
                 .passwordCompare()
                 .passwordAttribute("userPassword");
 //        auth.inMemoryAuthentication().withUser("admin")
@@ -58,7 +58,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         DefaultSpringSecurityContextSource contextSource = new
                 DefaultSpringSecurityContextSource(
                 Arrays.asList("ldap://localhost:8389/"), "dc=packtpub,dc=com");
-//        contextSource.afterPropertiesSet();
+        contextSource.afterPropertiesSet();
         return contextSource;
     }
 

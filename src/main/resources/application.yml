@@ -1,15 +1,33 @@
-server:
-  port: 8443
-  ssl:
-    enabled: true
-    key-alias: spring
-    key-store: src/main/resources/saml/keystore.jks
-    key-store-password: 12345678
-security:
-  saml2:
-    metadata-url: https://dev-9187050.okta.com/app/exk36pxqi0LdgzO1z5d6/sso/saml/metadata
+#LADP
 spring:
+  ldap:
+    embedded:
+      base-dn: dc=packpub,dc=com
+      credential:
+        username: uid=admin
+        password: secret
+      ldif: classpath:ldap/ldapschema.ldif
+      port: 8389
+      validation:
+        enabled: false
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+
+#SAML
+#server:
+#  port: 8443
+#  ssl:
+#    enabled: true
+#    key-alias: spring
+#    key-store: src/main/resources/saml/keystore.jks
+#    key-store-password: 12345678
+#security:
+#  saml2:
+#    metadata-url: https://dev-9187050.okta.com/app/exk36pxqi0LdgzO1z5d6/sso/saml/metadata
+#spring:
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/views/
+#      suffix: .jsp

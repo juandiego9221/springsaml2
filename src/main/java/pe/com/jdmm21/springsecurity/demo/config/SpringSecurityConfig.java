@@ -31,7 +31,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.ldapAuthentication().userDnPatterns("uid={0},ou=people")
+        auth.
+                ldapAuthentication()
+                .userDnPatterns("uid={0},ou=people")
                 .userSearchBase("ou=people")
                 .userSearchFilter("uid={0}")
                 .groupSearchBase("ou=groups")
@@ -55,20 +57,21 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public DefaultSpringSecurityContextSource contextSource() {
+        logger.info("inside ldap server");
         DefaultSpringSecurityContextSource contextSource = new
                 DefaultSpringSecurityContextSource(
-                Arrays.asList("ldap://localhost:8389/"), "dc=packtpub,dc=com");
+                Arrays.asList("ldap://localhost:8389/"), "dc=packpub,dc=com");
         contextSource.afterPropertiesSet();
         return contextSource;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/admins").hasRole("ADMINS")
+        http.authorizeRequests()    .antMatchers("/admins").hasRole("ADMINS")
                 .antMatchers("/users").hasRole("USERS")
                 .anyRequest().fullyAuthenticated()
                 .and()
-                .httpBasic();
+                .httpBasic(); // Use Basic authentication
 //        http.authorizeRequests().anyRequest().hasAnyRole("ADMIN", "USER")
 //                .and().httpBasic();
         //SAML

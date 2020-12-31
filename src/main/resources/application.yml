@@ -2,7 +2,7 @@
 spring:
   ldap:
     embedded:
-      base-dn: dc=packpub,dc=com
+      base-dn: dc=packtpub,dc=com
       credential:
         username: uid=admin
         password: secret
